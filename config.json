@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"wait_time": 100, "messages_before_break": 50, "telefones": "C:/Users/futur/Desktop/-/whatsApp_send/telefones.txt", "mensagem": "C:/Users/futur/Desktop/-/whatsApp_send/mensagem.txt"}
+=======
+{"wait_time": 500, "messages_before_break": 25, "telefones": "", "mensagem": ""}
+>>>>>>> c3093470442c222ae881c00b48436377e1d0a77e
