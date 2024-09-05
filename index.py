@@ -141,7 +141,7 @@ config = load_config()
 # Configurar a interface gráfica
 root = Tk()
 root.title("WhatsApp Message Sender")
-root.geometry("340x400") 
+root.geometry("500x250")
 style = Style(theme="darkly")
 
 wait_time_var = StringVar(value=config["wait_time"])
@@ -151,28 +151,35 @@ mensagem_var = StringVar(value=config.get("mensagem", ""))
 access_key_var = StringVar()
 status_var = StringVar()
 
-Label(root, text="Chave de Acesso:").grid(row=0, column=0, columnspan=3, pady=5)
-Entry(root, textvariable=access_key_var, width=50).grid(row=1, column=0, columnspan=3, pady=5)
+# Configurar a grade
+root.columnconfigure(0, weight=1)
+root.columnconfigure(1, weight=1)
+root.columnconfigure(2, weight=1)
 
-Label(root, text="Tempo de espera (segundos):").grid(row=2, column=0, columnspan=3, pady=5)
-Entry(root, textvariable=wait_time_var, width=50).grid(row=3, column=0, columnspan=3, pady=5)
+Label(root, text="Chave de Acesso:").grid(row=0, column=0, padx=5, pady=5, sticky="e")
+Entry(root, textvariable=access_key_var).grid(row=0, column=1, columnspan=2, padx=5, pady=5, sticky="w")
 
-Label(root, text="Mensagens antes do descanso:").grid(row=4, column=0, columnspan=3, pady=5)
-Entry(root, textvariable=messages_before_break_var, width=50).grid(row=5, column=0, columnspan=3, pady=5)
+Label(root, text="Tempo de espera (segundos):").grid(row=1, column=0, padx=5, pady=5, sticky="e")
+Entry(root, textvariable=wait_time_var).grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky="w")
 
-Label(root, text="Arquivo de telefones:").grid(row=6, column=0, columnspan=3, pady=5)
-Entry(root, textvariable=telefones_var, width=50).grid(row=7, column=0, columnspan=3, pady=5)
-Button(root, text="Selecionar arquivo", command=select_telefones_file, width=15).grid(row=7, column=2, pady=5)
+Label(root, text="Mensagens antes do descanso:").grid(row=2, column=0, padx=5, pady=5, sticky="e")
+Entry(root, textvariable=messages_before_break_var).grid(row=2, column=1, columnspan=2, padx=5, pady=5, sticky="w")
 
-Label(root, text="Arquivo de mensagem:").grid(row=8, column=0, columnspan=3, pady=5)
-Entry(root, textvariable=mensagem_var, width=50).grid(row=9, column=0, columnspan=3, pady=5)
-Button(root, text="Selecionar arquivo", command=select_mensagem_file, width=15).grid(row=9, column=2, pady=5)
+Label(root, text="Arquivo de telefones:").grid(row=3, column=0, padx=5, pady=5, sticky="e")
+Entry(root, textvariable=telefones_var).grid(row=3, column=1, padx=5, pady=5, sticky="w")
+Button(root, text="Selecionar arquivo", command=select_telefones_file).grid(row=3, column=2, padx=5, pady=5)
 
-Button(root, text="Iniciar", command=lambda: [verify_and_start_browser(), save_config({"wait_time": int(wait_time_var.get()), "messages_before_break": int(messages_before_break_var.get()), "telefones": telefones_var.get(), "mensagem": mensagem_var.get()})], width=15).grid(row=10, column=0, pady=20)
-Button(root, text="Enviar", command=send_messages_thread, width=15).grid(row=10, column=1, pady=20)
-pause_button = Button(root, text="Pausar", command=toggle_pause, width=15)
-pause_button.grid(row=10, column=2, pady=20)
+Label(root, text="Arquivo de mensagem:").grid(row=4, column=0, padx=5, pady=5, sticky="e")
+Entry(root, textvariable=mensagem_var).grid(row=4, column=1, padx=5, pady=5, sticky="w")
+Button(root, text="Selecionar arquivo", command=select_mensagem_file).grid(row=4, column=2, padx=5, pady=5)
 
-Label(root, textvariable=status_var).grid(row=11, column=0, columnspan=3, pady=5)
+Button(root, text="Iniciar", command=lambda: [verify_and_start_browser(), save_config({"wait_time": int(wait_time_var.get()), "messages_before_break": int(messages_before_break_var.get()), "telefones": telefones_var.get(), "mensagem": mensagem_var.get()})],width=15).grid(row=5, column=0, pady=20)
+
+Button(root, text="Enviar", command=send_messages_thread,width=15).grid(row=5, column=1, pady=20)
+
+pause_button = Button(root, text="Pausar", command=toggle_pause,width=15)
+pause_button.grid(row=5, column=2, pady=20)
+
+Label(root, textvariable=status_var).grid(row=6, column=0, columnspan=3, pady=5)
 
 root.mainloop()
