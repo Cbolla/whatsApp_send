@@ -75,7 +75,7 @@ def send_messages():
                 EC.presence_of_element_located((By.XPATH, '//span[@data-icon="send"]'))
             )
             send_button.click()
-            time.sleep(5)
+            time.sleep(2)
             count += 1
 
             # Remover o número usado do arquivo
